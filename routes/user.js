@@ -41,5 +41,21 @@ router.get('/:surName' , async (req, res) =>{
     }
 })
 
+router.put('/:surName', (req, res) =>{
+    try {
+        const user = User.findById(req.params.surName)
+        user.firstName=req.body.firstName
+        user.surName=req.body.surName
+        user.gender=req.body.gender
+        user.dateOfBirth=req.body.dateOfBirth
+        user.password=req.body.password
+        user.phoneNumber=req.body.phoneNumber
+        user.email=req.body.email
 
+        const response = user.save()
+        res.json(response)
+    }catch (err) {
+        res.send('Err: ' + err )
+    }
+})
 module.exports=router
