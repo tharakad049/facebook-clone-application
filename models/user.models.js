@@ -1,6 +1,12 @@
 const mongoose = require('mongoose')
+const {ObjectId} = require('mongodb')
 
 const userSchema = new mongoose.Schema({
+
+    userAccId : {
+        type : ObjectId,
+        required : true
+    },
     firstName: {
         type: String,
         required: true
@@ -17,17 +23,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    password : {
-        type : String,
-        required: true
-    },
     phoneNumber: {
        type: Number,
-       req:true
-    },
-    email: {
-        type: String,
-        req:true
+       required:true
     }
 })
 
