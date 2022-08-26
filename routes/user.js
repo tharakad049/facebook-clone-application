@@ -1,50 +1,39 @@
 const express = require('express');
-const app=express();
+const app = express();
 const router = express.Router()
 
 const User = require('../models/user.models')
-const UserAccount = require('../models/user.account')
 app.use(express.json());
 
-router.post('/createAccount', async (req, res)=> {
+router.post('/createAccount', async (req, res) => {
     try {
-        const re = await UserAccount.findOne({email: req.body.email});
+        const re = await User.findOne({email: req.body.email});
         if (re == null) {
-            const userAccountSave = await new UserAccount({
+            const user = new User({
+                firstName: req.body.firstName,
+                surName: req.body.surName,
+                gender: req.body.gender,
+                dateOfBirth: req.body.dateOfBirth,
+                phoneNumber: req.body.phoneNumber,
                 email: req.body.email,
                 password: req.body.password
-            }).save()
-            if (userAccountSave != null) {
-
-                const user = new User({
-                    firstName: req.body.firstName,
-                    surName: req.body.surName,
-                    gender: req.body.gender,
-                    dateOfBirth: req.body.dateOfBirth,
-                    phoneNumber: req.body.phoneNumber,
-                })
-                const response = await user.save();
-                response != null ? res.json({code: '200', message: 'Account create successful', data: null}) :
-                    res.json({code: '500', message: 'User Account Create Fail', data: null});
-            } else {
-                await res.json({code: '500', message: 'User Account Create Fail', data: null});
-            }
+            })
+            const response = await user.save();
+            response != null ? res.json({code: '200', message: 'Account create successful', data: null}) :
+            res.json({code: '500', message: 'User Account Create Fail', data: null});
         } else {
             res.json({code: '500', message: 'Email is Already Exists', data: null});
         }
-
-        const response = await user.save();
-        await res.json(response)
-    }catch (err) {
+    } catch (err) {
         res.send('Err : ' + err)
     }
 })
 
-router.get('/', async (req, res) =>{
+router.get('/', async (req, res) => {
     try {
-        const user =  await User.find()
+        const user = await User.find()
         await res.json(user)
-    }catch (err) {
+    } catch (err) {
         res.send('Err : ' + err)
     }
 })
@@ -58,9 +47,9 @@ router.get('/:password', async (req, res) => {
     }
 })
 
-router.put('/:password', (req, res) => {
+router.put('/updateProfile/:email', (req, res) => {
     try {
-        const user = User.findById(req.params.password)
+        const user = User.findById(req.params.email)
         user.firstName = req.body.firstName
         user.surName = req.body.surName
         user.gender = req.body.gender
