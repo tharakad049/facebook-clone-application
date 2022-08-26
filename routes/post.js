@@ -19,7 +19,7 @@ router.post('/createPost', async (req, res) => {
             })
 
             const response = await post.save();
-            response != null ? await res.json({code: '200', message: 'post create successful', data: null}) :
+            response != null ? await res.json({code: '200', message: 'post create successFull', data: null}) :
                 await res.json({code: '500', message: 'post create fail', data: null});
 
         } else {
@@ -37,7 +37,7 @@ router.post('/createPost', async (req, res) => {
                 body: body
             })
             const response = await post.save()
-            response != null ? res.json({code: '200', message: 'create post successful', data: null}) :
+            response != null ? res.json({code: '200', message: 'create post successFull', data: null}) :
                 res.json({code: '500', message: 'create post failed', data: null})
         }
     });
@@ -53,7 +53,7 @@ router.put('/updatePost/:id', (req, res) => {
                 title: fields.title[0],
                 body: fields.body[0]
             })
-            response != null ? res.json({code: '200', message: 'update post successfull', data: null}) :
+            response != null ? res.json({code: '200', message: 'update post successFull', data: null}) :
                 res.json({code: '500', message: 'update post Faild', data: null})
         } else {
             var form = new multiparty.Form();
@@ -67,7 +67,7 @@ router.put('/updatePost/:id', (req, res) => {
                 title: fields.title[0],
                 body: body
             })
-            response != null ? res.json({code: '200', message: 'update post successfull', data: null}) :
+            response != null ? res.json({code: '200', message: 'update post successFull', data: null}) :
                 res.json({code: '500', message: 'update post Faild', data: null})
         }
     })
@@ -75,7 +75,7 @@ router.put('/updatePost/:id', (req, res) => {
 
 router.delete('/deletePost/:id',async(req,res)=>{
     const response=await Post.findOneAndDelete({_id : req.params.id});
-    response!=null ? res.json({code:'200',message:'delete post successfull',data:null}) :
+    response!=null ? res.json({code:'200',message:'delete post successFull',data:null}) :
         res.json({code:'500',message:'delete post Faild',data:null})
 })
 

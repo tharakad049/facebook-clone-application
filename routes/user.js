@@ -38,42 +38,36 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:password', async (req, res) => {
+router.get('/:email', async (req, res) => {
     try {
-        const user = await User.findById(req.params.password)
+        const user = await User.findById(req.params.email)
         await res.json(user)
     } catch (err) {
         res.send('Err :' + err)
     }
 })
 
-router.put('/updateProfile/:email', (req, res) => {
-    try {
-        const user = User.findById(req.params.email)
-        user.firstName = req.body.firstName
-        user.surName = req.body.surName
-        user.gender = req.body.gender
-        user.dateOfBirth = req.body.dateOfBirth
-        user.password = req.body.password
-        user.phoneNumber = req.body.phoneNumber
-        user.email = req.body.email
+router.put('/updateProfile/:email' ,async(req,res)=>{
+    const response = await User.findOneAndUpdate({email : req.params.email} , req.body)
+    response!=null ? res.json({code:'200',message:'profile update success full',data:null}) :
+        res.json({code:'500',message:'profile update fail',data:null})
+})
 
-        const response = user.save()
-        res.json(response)
+router.delete('/deleteProfile/:email', async (req, res) => {
+    try {
+        const user = await User.findOne(req.params.email)
+        const response = await user.remove()
+        await res.json(response)
     } catch (err) {
         res.send('Err: ' + err)
     }
 })
 
-router.delete('/:id', async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id)
-        const response = await user.remove()
+router.post('/login',async(req,res)=>{
+    const response= await User.findOne({email : req.body.email , password : req.body.password});
+    response!=null ? res.json({code:'200',message:'login  success full',data:response.surName}) :
+        res.json({code:'500',message:'login fail',data:null})
 
-        await res.json(response)
-    } catch (err) {
-        res.send('Err: ' + err)
-    }
 })
 
 module.exports = router
