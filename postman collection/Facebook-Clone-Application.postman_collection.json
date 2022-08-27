@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "2eab8db9-5a13-4c09-8a54-5e4ca3b38ee9",
+		"name": "Facebook-Clone-Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\" : \"sunimal\",\r\n    \"surName\" : \"sunimal049\",\r\n    \"gender\" : \"male\",\r\n    \"dateOfBirth\" : \"1998-12-13\",\r\n    \"password\" : \"sunimal1213\",\r\n    \"phoneNumber\" : \"0778580393\",\r\n    \"email\" : \"sunimal13gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/session/createAccount",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"session",
+								"createAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/user/deleteProfile/?email=tharakad049@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"deleteProfile",
+								""
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "tharakad049@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Account",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\" : \"lakshikaaaNangi\",\r\n    \"surName\" : \"lakshiaa049\",\r\n    \"gender\" : \"female\",\r\n    \"dateOfBirth\" : \"2000-12-13\",\r\n    \"password\" : \"lakshiaaa1213\",\r\n    \"phoneNumber\" : \"0778580393\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/user/updateProfile/chalani49@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"user",
+								"updateProfile",
+								"chalani49@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "6306622432f42d6a594b16e0",
+									"type": "default"
+								},
+								{
+									"key": "date",
+									"value": "2022-10-10",
+									"type": "default"
+								},
+								{
+									"key": "time",
+									"value": "2.30",
+									"type": "default"
+								},
+								{
+									"key": "title",
+									"value": "222222",
+									"type": "default"
+								},
+								{
+									"key": "body",
+									"type": "file",
+									"src": "/C:/Users/Boralessa_Tech/Downloads/mercedes-benz-interior.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/post/createPost",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"post",
+								"createPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "hello",
+									"type": "default"
+								},
+								{
+									"key": "body",
+									"type": "file",
+									"src": "/C:/Users/Boralessa_Tech/Downloads/55-551009_programming-laptop-wallpapers-hd.jpg"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/post/updatePost/6309f1f28db43b76552d6971",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"post",
+								"updatePost",
+								"6309f1f28db43b76552d6971"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/post/deletePost/6309f1f28db43b76552d6971",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"post",
+								"deletePost",
+								"6309f1f28db43b76552d6971"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "session",
+			"item": [
+				{
+					"name": "login token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData= JSON.parse(responseBody)\r",
+									"postman.setEnvironmentVariable(\"token\", 'bearer '+jsonData.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"tharakad049@gmail.com\",\n    \"password\": \"dilan1213\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/session/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"session",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

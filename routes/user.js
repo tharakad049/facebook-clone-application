@@ -5,24 +5,6 @@ const router = express.Router()
 const User = require('../models/user.models')
 app.use(express.json());
 
-router.get('/', async (req, res) => {
-    try {
-        const user = await User.find()
-        res.json(user)
-    } catch (err) {
-        res.send('Err : ' + err)
-    }
-})
-
-router.get('/:email', async (req, res) => {
-    try {
-        const user = await User.findById(req.params.email)
-        await res.json(user)
-    } catch (err) {
-        res.send('Err :' + err)
-    }
-})
-
 router.put('/updateProfile/:email' ,async(req,res)=>{
     const response = await User.findOneAndUpdate({email : req.params.email} , req.body)
     response!=null ? res.json({code:'200',message:'profile update success full',data:null}) :
