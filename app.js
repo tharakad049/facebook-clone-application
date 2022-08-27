@@ -5,6 +5,9 @@ const port=4000;
 
 const user = require('./routes/user')
 const post = require('./routes/post')
+const session = require('./routes/sesson')
+
+const auth = require('./middleware/auth')
 const url='mongodb://localhost/facebook-clone-application'
 
 const options = {
@@ -25,8 +28,9 @@ con.on("open",()=>{
 })
 
 app.use(express.json())
-app.use('/user', user)
+app.use('/user',auth ,  user)
 app.use('/post', post)
+app.use('/session', session)
 
 app.listen(port,()=>{
     console.log(`server is started in port ${port}`)
